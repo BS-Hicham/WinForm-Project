@@ -1,0 +1,235 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace PE_TP_04
+{
+    public partial class TripsSingUp : Form
+    {
+        public enum TypeClient
+        {
+            Adult,Mineur,Abonne
+        }
+        public enum TypeVoyage
+        {
+            Simple,Double
+        }
+        public Ex_02()
+        {
+            InitializeComponent();
+        }
+        int pos = -1;
+        private void Ex_02_Load(object sender, EventArgs e)
+        {
+            cmb_bagage.Items.Clear();
+            cmb_tAbonne.Items.Clear();
+            lb_arriver.Items.Clear();
+            lb_depart.Items.Clear();
+            cmb_tAbonne.Items.AddRange(new string[] { "Normal", "Gold", "Star" });
+            cmb_bagage.Items.AddRange(new string[] { "Entre 10kg et 50kg", "Entre 50kg et 80kg", "supérieur à 80kg" });
+            lb_depart.Items.AddRange(new string[] { "Rabat", "Paris", "London", "New York" });
+            lb_arriver.Items.AddRange(new string[] { "Rabat", "Paris", "London", "New York" });
+            txt_MntPayer.Enabled = false;
+            txt_tarif.Enabled = false;
+
+            lv1.Columns.Add("CNE", 80, HorizontalAlignment.Left);
+            lv1.Columns.Add("Nom", 100, HorizontalAlignment.Left);
+            lv1.Columns.Add("Prenom", 80, HorizontalAlignment.Left);
+            lv1.Columns.Add("TypeClient", 60, HorizontalAlignment.Left);
+            lv1.Columns.Add("Bagage", 80, HorizontalAlignment.Left);
+            lv1.Columns.Add("Voyage", 60, HorizontalAlignment.Left);
+            lv1.Columns.Add("Depart de", 100, HorizontalAlignment.Left);
+            lv1.Columns.Add("Arrivé à", 100, HorizontalAlignment.Left);
+            lv1.Columns.Add("nbr palce", 60, HorizontalAlignment.Right);
+            lv1.Columns.Add("Tarif", 60, HorizontalAlignment.Right);
+            lv1.View = View.Details;
+            lv1.GridLines = true;
+            lv1.FullRowSelect = true;
+        }
+
+        private void rb_tAbonne_CheckedChanged(object sender, EventArgs e)
+        {
+                cmb_tAbonne.Enabled = rb_tAbonne.Checked;
+        }
+
+        private void chkb_bagage_CheckedChanged(object sender, EventArgs e)
+        {
+            cmb_bagage.Enabled = chkb_bagage.Checked;
+        }
+
+        private void lb_ville_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lb_arriver.SelectedIndex!=-1 && lb_depart.SelectedIndex!=-1 && lb_arriver.Text == lb_depart.Text)
+            {
+                MessageBox.Show("veuillez choisir une autre ville");
+                ((ListBox)sender).SelectedIndex = -1;
+            }
+        }
+
+        private void btn_nouv_Click(object sender, EventArgs e)
+        {
+            pos = -1;
+            txt_cne.Clear();
+            txt_MntPayer.Clear();
+            txt_nbrPlace.Clear();
+            txt_nom.Clear();
+            txt_prenom.Clear();
+            txt_tarif.Clear();
+            rb_tAdult.Checked = true;
+            rb_vAllerSimple.Checked = true;
+            chkb_bagage.Checked = false;
+            lb_arriver.SelectedIndex = -1;
+            lb_depart.SelectedIndex = -1;
+            txt_cne.Select();
+        }
+
+        private void btn_ajout_Click(object sender, EventArgs e)
+        {
+            int nbrP;
+            if (txt_cne.Text != "" && txt_MntPayer.Text != "" && txt_nbrPlace.Text != "" && txt_nom.Text != "" && txt_prenom.Text != "" && txt_tarif.Text != "" && int.TryParse(txt_nbrPlace.Text, out nbrP))
+            {
+                ListViewItem item = new ListViewItem();
+                RemplirItem(item);
+                lv1.Items.Add(item);
+
+            }
+        }
+
+        private void RemplirItem(ListViewItem item)
+        {
+            item.Text = txt_cne.Text;
+            item.SubItems.Clear();
+            item.SubItems.Add(txt_nom.Text);
+            item.SubItems.Add(txt_prenom.Text);
+            string typ = "";
+            if (rb_tAdult.Checked)
+                typ = TypeClient.Adult.ToString();
+            else if (rb_tMineur.Checked)
+                typ = TypeClient.Mineur.ToString();
+            else
+                typ = TypeClient.Abonne.ToString() + ":" + cmb_tAbonne.Text;
+
+            item.SubItems.Add(typ);
+            string bagag = "";
+            if (chkb_bagage.Checked)
+                bagag = "Avec Bagage:" + (cmb_bagage.SelectedIndex + 1).ToString();
+            else
+                bagag = "Sans Bagage";
+            item.SubItems.Add(bagag);
+
+            string typv = "";
+            if (rb_vAllerSimple.Checked)
+                typv = TypeVoyage.Simple.ToString();
+            else
+                typv = TypeVoyage.Double.ToString();
+            item.SubItems.Add(typv);
+
+            item.SubItems.Add(lb_depart.Text);
+            item.SubItems.Add(lb_arriver.Text);
+            item.SubItems.Add(txt_nbrPlace.Text);
+            item.SubItems.Add(txt_tarif.Text);
+        }
+
+        private double trif()
+        {
+            double[,] t = new double[,] {{0,1500,2630,3500},{1500,0,1300,2700},{2630,1300,0,1200},{3500,2700,1200,0}};
+            double mnt = t[lb_depart.SelectedIndex, lb_arriver.SelectedIndex];
+            if (rb_tMineur.Checked) mnt = mnt * 0.5;
+            else if (rb_tAbonne.Checked)
+            {
+                if (cmb_tAbonne.Text == "Gold") mnt = mnt * 0.02 + 500;
+                else if (cmb_tAbonne.Text == "Normal") mnt = mnt * 0.05 + 500;
+                else mnt = 500;
+            }
+            if (chkb_bagage.Checked)
+            {
+                switch (cmb_bagage.SelectedIndex)
+                {
+                    case 0:
+                        mnt += 200;
+                        break;
+                    case 1:
+                        mnt += 300;
+                        break;
+                    case 2:
+                        mnt += 500;
+                        break;
+                }
+            }
+            if (rb_vAllerRetour.Checked) mnt = mnt * 2;
+            return mnt;
+        }
+
+        private void txt_nbrPlace_TextChanged(object sender, EventArgs e)
+        {
+            int n;
+            if (txt_nbrPlace.Text != "" && int.TryParse(txt_nbrPlace.Text, out n))
+            {
+                double ta = trif();
+                txt_tarif.Text = ta.ToString();
+                txt_MntPayer.Text = (ta * n).ToString();
+            }
+        }
+
+        private void lv1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lv1.SelectedItems.Count > 0)
+            {
+                pos = lv1.SelectedIndices[0];
+                ListViewItem item = lv1.SelectedItems[0];
+                txt_cne.Text = item.Text;
+                txt_nom.Text = item.SubItems[1].Text;
+                txt_prenom.Text = item.SubItems[2].Text;
+                string typ=item.SubItems[3].Text;
+                if (typ == TypeClient.Adult.ToString()) rb_tAdult.Checked = true;
+                else if (typ == TypeClient.Mineur.ToString()) rb_tMineur.Checked = true;
+                else
+                {
+                    rb_tAbonne.Checked = true;
+                    string abn = typ.Split(':')[1].Trim();
+                    cmb_tAbonne.Text = abn;
+                }
+                string bagag = item.SubItems[4].Text;
+                if (bagag.IndexOf("Sans") != -1)
+                {
+                    chkb_bagage.Checked = false;
+                }
+                else
+                {
+                    chkb_bagage.Checked = true;
+                    int i = int.Parse(bagag.Split(':')[1].Trim());
+                    cmb_bagage.SelectedIndex = i - 1;
+                }
+                if (item.SubItems[5].Text == TypeVoyage.Double.ToString()) rb_vAllerSimple.Checked = true;
+                else rb_vAllerRetour.Checked = true;
+                lb_depart.Text = item.SubItems[6].Text;
+                lb_arriver.Text = item.SubItems[7].Text;
+                txt_nbrPlace.Text = item.SubItems[8].Text;
+
+            }
+        }
+
+        private void btn_modif_Click(object sender, EventArgs e)
+        {
+            if (pos!=-1)
+            {
+                ListViewItem item = lv1.SelectedItems[0];
+                int nbrP;
+                if (txt_cne.Text != "" && txt_MntPayer.Text != "" && txt_nbrPlace.Text != "" && txt_nom.Text != "" && txt_prenom.Text != "" && txt_tarif.Text != "" && int.TryParse(txt_nbrPlace.Text, out nbrP))
+                {
+                    RemplirItem(item);
+                }
+            }
+        }
+
+        private void btn_ferm_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}
