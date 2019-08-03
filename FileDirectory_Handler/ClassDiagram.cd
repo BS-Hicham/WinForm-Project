@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="PEOO_EFM_2017_2.Classes.Disque">
+    <Position X="0.5" Y="2.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAACAAAAAAAICQAAAAQAMAAAAARAAAAAAA=</HashCode>
+      <FileName>Classes\Disque.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_dossiers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="PEOO_EFM_2017_2.Classes.Fichier">
+    <Position X="5.25" Y="7" Width="4.5" />
+    <InheritanceLine Type="PEOO_EFM_2017_2.Classes.Dossier" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.375" Y="6.199" />
+        <Point X="7.375" Y="7" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAACEAAAAAAAAAAAAAAAAgAAAAAAABAA=</HashCode>
+      <FileName>Classes\Fichier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PEOO_EFM_2017_2.Classes.Dossier">
+    <Position X="5.5" Y="1.5" Width="3.5" />
+    <AssociationLine Name="_parent" Type="PEOO_EFM_2017_2.Classes.Dossier" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="2.997" />
+        <Point X="5.125" Y="2.997" />
+        <Point X="5.125" Y="1.125" />
+        <Point X="7.783" Y="1.125" />
+        <Point X="7.783" Y="1.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.548" Y="0.466" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAgAASEgMAAQAAQBiAAAACAAAAAgAAAIAA=</HashCode>
+      <FileName>Classes\Dossier.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_parent" />
+    </ShowAsAssociation>
+    <Lollipop Position="1.138" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
