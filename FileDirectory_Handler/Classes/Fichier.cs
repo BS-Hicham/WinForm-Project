@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace PEOO_EFM_2017_2.Classes
+namespace FileDirectory_Handler.Classes
 {
     //B
     //1
