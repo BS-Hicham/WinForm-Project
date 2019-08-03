@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="PEOO_EFM_2018.Classes.DesktopPC">
+    <Position X="7.25" Y="7.5" Width="8" />
+    <InheritanceLine Type="PEOO_EFM_2018.Classes.Ordinateur" FixedFromPoint="true">
+      <Path>
+        <Point X="8.5" Y="6.353" />
+        <Point X="8.5" Y="7.125" />
+        <Point X="11.25" Y="7.125" />
+        <Point X="11.25" Y="7.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQgAAAAAAEAAAAIAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Classes\DesktopPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PEOO_EFM_2018.Classes.Ecran">
+    <Position X="13.5" Y="1.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAQgAAAEAAAAAAAAAAAAAAABgAAAAABAAAA=</HashCode>
+      <FileName>Classes\Ecran.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PEOO_EFM_2018.Classes.LaptopPC">
+    <Position X="4.25" Y="7.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAIAABAAAAIAAAAAAAAAAAAAAAAAIAAAgA=</HashCode>
+      <FileName>Classes\LaptopPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PEOO_EFM_2018.Classes.Ordinateur">
+    <Position X="5.25" Y="0.5" Width="6.5" />
+    <AssociationLine Name="_ecranOrdi" Type="PEOO_EFM_2018.Classes.Ecran">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.454" Y="0.143" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_se" Type="PEOO_EFM_2018.Classes.SystemeExploitation" ManuallyRouted="true">
+      <Path>
+        <Point X="5.25" Y="1.125" />
+        <Point X="1.563" Y="1.125" />
+        <Point X="1.563" Y="1.627" />
+        <Point X="2.625" Y="1.627" />
+        <Point X="2.625" Y="2" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-1.711" Y="1.026" Height="0.182" Width="2.07" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAkAABQAHQAAACoABEIEAEAACAAABgAAABAAgA=</HashCode>
+      <FileName>Classes\Ordinateur.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_ecranOrdi" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_se" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PEOO_EFM_2018.Classes.SystemeExploitation">
+    <Position X="0.5" Y="2" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAQAACAAAAAAAEgAAAAAAAAACCAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Classes\SystemeExploitation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PEOO_EFM_2018.Frm_ListeOrd">
+    <Position X="18.75" Y="0.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>CACQAAAEACAACSABAACAAAACAAAIAAAAAWAEBoABxAI=</HashCode>
+      <FileName>Frm_ListeOrd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="PEOO_EFM_2018.Classes.TypeEcran">
+    <Position X="14.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgACAAAAAAAACAAgAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Classes\TypeEcran.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
